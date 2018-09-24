@@ -29,11 +29,10 @@
 		"webundle/puzzle-admin-dashboard": "^1.0"
 	},
 	"autoload" : {
-		"psr-0" : {
-			"Webundle\\Puzzle\\Admin\\UserBundle" : ""
+		"psr-4" : {
+			"Puzzle\\Admin\\UserBundle\\" : ""
 		}
 	},
-	"target-dir" : "Webundle/Puzzle/Admin/UserBundle",
 	"extra" : {
 		"branch-alias" : {
 			"dev-master" : "1.0-dev"
