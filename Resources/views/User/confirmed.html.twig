@@ -1,0 +1,17 @@
+{% trans_default_domain 'app' %}
+
+{% extends 'AppBundle::layout_security.html.twig' %}
+
+{% block title %}Douanes App - Confirmation{% endblock %}
+
+{% block stylesheets %}{{ parent() }}{% endblock %}
+
+{% block form %}
+<form>
+	<p class="mt5 mb20">{{ 'registration.confirmed'|trans({'%username%': username}) }}</p>
+	<a href="{{ path('app_security_login') }}"><small>{{ 'layout.login'|trans }}</small></a>
+{# 	<a href="{{ path('app_security_login') }}" class="btn btn-success btn-block"><small>{{ 'layout.login'|trans }}</small></a>#}
+</form>
+{% endblock %}
+
+{% block javascripts %}{{ parent() }}{% endblock %}

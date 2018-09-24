@@ -1,0 +1,142 @@
+{% trans_default_domain 'admin' %}
+
+{% set subactive = "admin_user_list" %}
+
+{% extends 'PuzzleAdminUserBundle::layout.html.twig' %}
+
+{% block title %}{{ parent() }} - {{ "user.content.user.show"|trans }} {{ user.fullName }} {% endblock %}
+
+{% block mainsubtitle %}{{ parent() }} - {{ "user.navigation.user"|trans }}{% endblock %}
+
+{% block breadcrumbs %}
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li><a href="{{ url('admin_user_list') }}">{{ "user.content.user.list"|trans }}</a></li>
+            <li class="active">{{ "user.content.user.show"|trans }}</li>
+        </ul>
+        <ul class="breadcrumb-elements">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="icon-plus position-left"></i>
+                    Actions
+                    <span class="caret"></span>
+                </a>
+
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li>
+                        <a href="{{ url('admin_user_update', { 'id': user.id }) }}" title="{{ "button.update"|trans }}" alt="{{ "button.update"|trans }}">
+                            <i class="icon-pencil"></i>
+                            {{ "button.update"|trans }}
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="{{ url('admin_user_delete', {'id': user.id}) }}" data-toggle="modal" title="{{ "button.delete"|trans }}" class="delete-item" id="delete-item-{{ user.id }}">
+                            <i class="icon-trash-alt text-danger"></i>
+                            {{ "button.delete"|trans }}
+                        </a>
+                        <input type="hidden" id="label-delete-item-{{ user.id }}" value="{{ user.fullName }}">
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+{% endblock %}
+
+{% block mainpage %}
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="panel panel-flat">
+                <div class="panel-body">
+                    <fieldset>
+                        <div class="form-group">
+                            <label for="first_name">{{ "user.label.user.firstName"|trans }}</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="icon-user"></i>
+                                </span>
+                                <input type="text" class="form-control" id="full_name" value="{{ user.fullName }}" disabled />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">{{ "user.label.user.email"|trans }}</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="icon-envelope"></i>
+                                </span>
+                                <input type="text" class="form-control" id="email" value="{{ user.email }}" disabled/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="username">{{ "user.label.user.username"|trans }}</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="icon-lock"></i>
+                                </span>
+                                <input type="text" class="form-control" id="username" value="{{ user.username }}" disabled />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="last_name">{{ "user.label.user.password"|trans }}</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="icon-lock"></i>
+                                </span>
+                                <input type="text" class="form-control" id="password" value="*************" disabled/>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="panel panel-flat">
+                <div class="panel-body">
+                    <fieldset>
+                        <div class="form-group">
+                            <label for="username">{{ "user.label.user.accountExpiresAt"|trans }}</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="icon-calendar"></i>
+                                </span>
+                                <input type="text" class="form-control" id="accountExpiresAt" value="{{ user.accountExpiresAt|date('d-m-Y')|default('-') }}" disabled />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="username">{{ "user.label.user.credentialsExpiresAt"|trans }}</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="icon-calendar"></i>
+                                </span>
+                                <input type="text" class="form-control" id="credentialsExpiresAt" value="{{ user.credentialsExpiresAt|date('d-m-Y')|default('-') }}" disabled />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="checkbox checkbox-switchery switchery-sm">
+                                <label for="enabled">{{ "user.label.user.enabled"|trans }}</label>
+                                <input type="checkbox" class="switchery" id="enabled" {% if user.enabled == 1 %}checked="checked"{% endif %} disabled />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="checkbox checkbox-switchery switchery-sm">
+                                <label for="locked">{{ "user.label.user.locked"|trans }}</label>
+                                <input type="checkbox" class="switchery" id="locked" {% if user.locked == 1 %}checked="checked"{% endif %} disabled />
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/puzzleadmin/js/plugins/forms/styling/uniform.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/puzzleadmin/js/plugins/forms/styling/switchery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/puzzleadmin/js/plugins/forms/styling/switch.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/puzzleadmin/js/pages/form_checkboxes_radios.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/puzzleadmin/js/plugins/pickers/pickadate/picker.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/puzzleadmin/js/plugins/pickers/pickadate/picker.date.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/puzzleadmin/js/plugins/pickers/pickadate/picker.time.js') }}"></script>   
+{% endblock %}

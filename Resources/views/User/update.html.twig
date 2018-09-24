@@ -1,0 +1,42 @@
+{% trans_default_domain 'admin' %}
+
+{% set active = "admin" %}
+
+{% set subactive = "admin_user_list" %}
+
+{% extends 'PuzzleAdminUserBundle::layout_editor.html.twig' %}
+
+{% block title %}{{ parent() }} - {{ "user.content.user.update"|trans }} {{ user.fullName }} {% endblock %}
+
+{% block mainsubtitle %} - {{ "user.navigation.user"|trans }} {% endblock %}
+
+{% block breadcrumbs %}
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li><a href="{{ url('admin_user_list') }}">{{ "user.content.user.list"|trans }}</a>
+            <li class="active">{{ "user.content.user.update"|trans }}</li>
+        </ul>
+    </div>
+{% endblock %}
+
+{% block mainpage %}
+    {% include 'PuzzleAdminUserBundle:User:form.html.twig' with { 'form' : form, 'user' : user } %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/puzzleadmin/js/plugins/forms/styling/uniform.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/puzzleadmin/js/plugins/forms/styling/switchery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/puzzleadmin/js/plugins/forms/styling/switch.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/puzzleadmin/js/pages/form_checkboxes_radios.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/puzzleadmin/js/plugins/pickers/pickadate/picker.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/puzzleadmin/js/plugins/pickers/pickadate/picker.date.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/puzzleadmin/js/plugins/pickers/pickadate/picker.time.js') }}"></script>   
+    <script type="text/javascript">
+        // Datetime Picker
+        $(".pickadate").pickadate({
+            format: "dd-mm-yyyy"
+        });
+    </script>
+{% endblock %}
+

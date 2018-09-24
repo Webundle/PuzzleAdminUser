@@ -1,0 +1,48 @@
+user:
+    title: 'Comptes'
+    description: 'Gestion des comptes utilisateurs'
+    icon: 'icon-users'
+    role:
+        user: 'Utilisateur'
+        admin: 'Administrateur de la plateforme'
+        user_manage: 'Administrateur des comptes'
+    navigation:
+        user: 'Utilisateurs'
+        group: 'Groupes'
+    content:
+        user:
+            list: 'Liste des utilisateurs'
+            show: 'Détails d''un utilisateur'
+            create: 'Nouvel utilisateur'
+            update: 'Modifier'
+            remove: 'Etes-vous sûr de vouloir supprimer l''utilisateur'
+            remove_list: 'Etes-vous sûr de vouloir supprimer la sélection d''utilisateurs'
+        group:
+            list: 'Liste des groupes'
+            show: 'Détails du groupe'
+            create: 'Nouveau groupe'
+            update: 'Modifier le groupe'
+            remove: 'Etes-vous sûr de vouloir supprimer le groupe'
+            remove_list: 'Etes-vous sûr de vouloir supprimer la sélection de groupes'
+    label:
+        group:
+            name: 'Nom'
+            description: 'Description'
+            users: 'Utilisateurs'
+        user:
+            firstName: 'Nom'
+            lastName: 'Prénoms'
+            fullName: 'Nom & Prénoms'
+            email: 'E-mail'
+            phone: 'Téléphone'
+            role: 'Entreprise'
+            picture: 'Photo de profil'
+            isActive: 'Status'
+            username: 'Nom d''utilisateur'
+            password: 'Mot de passe'
+            password_repeated: 'Confirmer le mot de passe'
+            credentialsExpiresAt: 'Expiration des paramètres'
+            accountExpiresAt: 'Expiration du compte'
+            locked: 'Verrouillé / Déverrouillé'
+            enabled: 'Activé / Désactivé'
+            roles: 'Habilitations'

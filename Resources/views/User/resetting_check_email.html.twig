@@ -1,0 +1,17 @@
+{% trans_default_domain 'app' %}
+
+{% extends 'AppBundle::layout_security.html.twig' %}
+
+{% block title %}Douanes App - Mot de passe oublié{% endblock %}
+
+{% block stylesheets %}{{ parent() }}{% endblock %}
+
+{% block form %}
+<form>
+	<h4 class="nomargin">{{ 'security.login.password_forbidden'|trans }}</h4>
+	<p class="mt5 mb20">{{ 'resetting.check_email'|trans({'%tokenLifetime%': tokenLifetime}) }}</p>
+	<a href="{{ path('app_security_login') }}"><small>{{ 'layout.login'|trans }}</small></a>
+</form>
+{% endblock %}
+		
+{% block javascripts %}{{ parent() }}{% endblock %}

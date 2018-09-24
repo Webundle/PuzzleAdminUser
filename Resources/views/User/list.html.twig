@@ -1,0 +1,103 @@
+{% trans_default_domain 'admin' %}
+
+{% set subactive = "admin_user_list" %}
+
+{% extends 'PuzzleAdminUserBundle::layout_table.html.twig' %}
+
+{% block title %}{{ parent() }} - {{ "user.content.user.list"|trans }} {% endblock %}
+
+{% block mainsubtitle %} - {{ "user.navigation.user"|trans|capitalize }}{% endblock %}
+
+{% block headingelements %}
+    <a href="{{ url('admin_user_create') }}" class="btn btn-primary btn-labeled">
+        <b><i class="icon-add"></i></b>
+        {{ "user.content.user.create"|trans }}
+    </a>
+{% endblock %}
+
+{% block breadcrumbs %}
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li class="active">{{ "user.content.user.list"|trans|capitalize }}</li>
+        </ul>
+        <ul class="breadcrumb-elements">
+            <li>
+                <a href="#" class="text-danger delete-list toggle-action hide">
+                    <i class="icon-trash-alt"></i> {{ "button.delete_list"|trans }}
+                </a>
+                <input type="hidden" value="admin_user_delete" id="delete-route-name"/>
+            </li>
+        </ul>
+    </div>
+{% endblock %}
+
+{% block mainpage %}
+    <div class="col-lg-12">
+        <div class="panel panel-flat">
+            <table class="table datatable">
+                <thead>
+                    <tr>
+                        <th>
+                            {% if users is not empty %}
+                                <a href="#" id="toggle-check">
+                                    <i class="icon-checkbox-unchecked toggle-icon"  id="toggle-check-icon"></i>
+                            </a>
+                                <input type="hidden" value="{{ users|length|default('0') }}" id="toggle-items-count">
+                                <input type="hidden" value="0" id="toggle-items-checked-count">
+                            {% endif %}
+                        </th>
+                        <th>{{ "user.label.user.fullName"|trans }}</th>
+                        <th>{{ "user.label.user.email"|trans }}</th>
+                        <th class="text-center">{{ "user.label.user.enabled"|trans }}</th>
+                        <th class="text-center">{{ "user.label.user.locked"|trans }}</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                        {% if user.id != app.user.id %}
+                            <tr class="toggleable" id="item-{{ user.id }}">
+                                <td>
+                                    <a class="text-muted text-small text-left toggleable-btn-select" href="#">
+                                        <i class="icon-checkbox-unchecked toggle-icon toggle-item" id="toggle-item-{{ user.id }}"></i>
+                                    </a>
+                                </td>
+                                <td>{{ user.fullName }}</td>
+                                <td>{{ user.email }}</td>
+                                <td class="text-center">
+                                    {% set enabled = "user.label.user.enabled"|trans %}
+                                    {% if user.enabled == 1 %}
+                                        <span class="badge badge-success">{{ enabled|split('/')[0] }}</span>
+                                    {% else %}
+                                        <span class="badge badge-default">{{ enabled|split('/')[1] }}</span>
+                                    {% endif %}
+                                </td>
+                                <td class="text-center">
+                                    {% set locked = "user.label.user.locked"|trans %}
+                                    {% if user.locked == 1 %}
+                                        <span class="badge badge-success">{{ locked|split('/')[0] }}</span>
+                                    {% else %}
+                                        <span class="badge badge-default">{{ locked|split('/')[1] }}</span>
+                                    {% endif %}
+                                </td>
+                                <td class="text-right">
+                                    <div class="btn-control">
+                                        <span class="icons-list toggleable-btn hide toggleable-btn-controls">
+                                            <a href="{{ url('admin_user_update', { 'id': user.id }) }}" title="{{ "button.update"|trans }}" class="mr-10">
+                                                <i class="icon-pencil"></i> 
+                                            </a>
+                                            <a href="{{ url('admin_user_delete', {'id': user.id}) }}" data-toggle="modal" title="{{ "button.delete"|trans }}" class="delete-item" id="delete-item-{{ user.id }}">
+                                                <i class="icon-trash-alt text-danger"></i>
+                                            </a>
+                                            <input type="hidden" id="label-delete-item-{{ user.id }}" value="{{ user.fullName }}">
+                                        </span>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% trans_default_domain 'admin' %}
+
+{% if app.user.hasRole('ROLE_USER_MANAGE') or app.user.hasRole('ROLE_ADMIN')  %}
+    <li {% if active == "user" %}class="active"{% endif %}>
+        <a href="#">
+            <i class="{{ "user.icon"|trans }}"></i>
+            <span>{{ "user.title"|trans }}</span>
+        </a>
+        <ul>
+            <li {% if subactive == "admin_user_list" %}class="active"{% endif %}>
+            <a href="{{ url('admin_user_list') }}">{{ "user.navigation.user"|trans }}</a>
+            </li>
+            <li {% if subactive == "admin_user_group_list" %}class="active"{% endif %}>
+            <a href="{{ url('admin_user_group_list') }}">{{ "user.navigation.group"|trans }}</a>
+            </li>
+        </ul>
+    </li>
+{% endif %}

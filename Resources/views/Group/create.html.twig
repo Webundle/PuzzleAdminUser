@@ -1,0 +1,16 @@
+{% trans_default_domain 'admin' %}
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header bg-info">
+            <h3>{{ "user.content.group.create"|trans }}</h3>
+        </div>
+        {% include 'PuzzleAdminUserBundle:Group:form.html.twig' with { 'form' : form } %}
+    </div>
+</div>
+<script>
+    // Default initialization
+    $('.select').select2({
+        minimumResultsForSearch: Infinity
+    });
+</script>

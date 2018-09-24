@@ -1,0 +1,2 @@
+{% trans_default_domain 'app' %}
+{{ 'registration.email.message'|trans({'%username%': username, '%plainPassword%': plainPassword, '%confirmationUrl%': confirmationUrl})|raw }}

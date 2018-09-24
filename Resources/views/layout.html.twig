@@ -1,0 +1,11 @@
+{% trans_default_domain 'admin' %}
+
+{% set active = "user" %}
+
+{% extends 'PuzzleAdminBundle::layout.html.twig' %}
+
+{% block title %}{{ parent() }} - {{ "user.title"|trans }} {% endblock %}
+
+{% block mainicon %}<i class="{{ "user.icon"|trans }}"></i>{% endblock %}
+{% block maintitle %}{{ "user.title"|trans }}{% endblock %}
+{% block extrasidebartoggle %}<li><a class="sidebar-mobile-detached-toggle"><i class="icon-grid7"></i></a></li>{% endblock %}

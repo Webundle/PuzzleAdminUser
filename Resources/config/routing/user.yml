@@ -1,0 +1,85 @@
+admin_user_list:
+    path:     /user/list
+    defaults: { _controller: 'PuzzleAdminUserBundle:User:list' }
+    methods:  [GET]
+
+admin_user_list_datatable:
+    path:     /user/list-for-datatable
+    defaults: { _controller: 'PuzzleAdminUserBundle:User:listForDatatable' }
+
+admin_user_list_autocomplete:
+    path:     /user/list-for-autocomplete
+    defaults: { _controller: 'PuzzleAdminUserBundle:User:listForAutocomplete' }
+
+admin_user_create:
+    path:     /user/create
+    defaults: { _controller: 'PuzzleAdminUserBundle:User:create' }
+    methods:  [GET, POST]
+
+admin_user_show:
+    path:     /user/{id}/show
+    defaults: { _controller: 'PuzzleAdminUserBundle:User:show' }
+    methods:  [GET]
+
+admin_user_update:
+    path:     /user/{id}/update
+    defaults: { _controller: 'PuzzleAdminUserBundle:User:update' }
+    methods:  [GET, POST]
+    
+admin_user_lock:
+    path:     /user/{id}/lock
+    defaults: { _controller: 'PuzzleAdminUserBundle:User:lock' }
+    options:
+        expose: true
+
+admin_user_unlock:
+    path:     /user/{id}/unlock
+    defaults: { _controller: 'PuzzleAdminUserBundle:User:unlock' }
+    options:
+        expose: true
+
+admin_user_delete:
+    path:     /user/{id}/delete
+    defaults: { _controller: 'PuzzleAdminUserBundle:User:delete' }
+
+# User personal
+puzzle_user_confirm:
+    path:     /confirm/{token}
+    defaults: { _controller: 'PuzzleAdminUserBundle:User:confirm' }
+    methods:  [GET]
+
+puzzle_user_profil:
+    path:     /myaccount/profil
+    defaults: { _controller: 'PuzzleAdminUserBundle:User:profil' }
+    methods:  [GET]
+
+puzzle_user_settings:
+    path:     /myaccount/settings
+    defaults: { _controller: 'PuzzleAdminUserBundle:User:settings' }
+    methods:  [GET, POST]
+
+puzzle_user_change_password:
+    path:     /myaccount/change/password
+    defaults: { _controller: 'PuzzleAdminUserBundle:User:changePassword' }
+    methods:  [GET, POST]
+
+# Resetting reset user password
+puzzle_user_resetting_request:
+    path:     /resetting/request
+    defaults: { _controller: 'PuzzleAdminUserBundle:User:resettingRequest' }
+    methods:  GET
+
+puzzle_user_resetting_send_email:
+    path:     /resetting/send-email
+    defaults: { _controller: 'PuzzleAdminUserBundle:User:resettingSendEmail' }
+    methods:  POST
+
+puzzle_user_resetting_check_email:
+    path:     /resetting/check-email
+    defaults: { _controller: 'PuzzleAdminUserBundle:User:resettingCheckEmail' }
+    methods:  GET
+
+puzzle_user_resetting_reset:
+    path:     /resetting/reset/{token}
+    defaults: { _controller: 'PuzzleAdminUserBundle:User:resettingReset' }
+    methods:  [GET, POST]

@@ -1,0 +1,46 @@
+{% trans_default_domain 'admin' %}
+
+{% set active = "admin" %}
+
+{% set subactive = "admin_user_list" %}
+
+{% extends 'PuzzleAdminUserBundle::layout_editor.html.twig' %}
+
+{% block title %}{{ parent() }} - {{ "user.content.user.create"|trans }} {% endblock %}
+
+{% block mainsubtitle %}{{ "user.content.user.create"|trans }}{% endblock %}
+
+{% block breadcrumbs %}
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li><a href="{{ url('admin_user_list') }}">{{ "user.content.user.list"|trans }}</a></li>
+            <li class="active">{{ "user.content.user.create"|trans }}</li>
+        </ul>
+    </div>
+{% endblock %}
+
+{% block mainpage %}
+    {% include 'PuzzleAdminUserBundle:User:form.html.twig' with { 'form' : form } %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/puzzleadmin/js/plugins/forms/styling/uniform.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/puzzleadmin/js/plugins/forms/styling/switchery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/puzzleadmin/js/plugins/forms/styling/switch.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/puzzleadmin/js/pages/form_checkboxes_radios.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/puzzleadmin/js/plugins/pickers/pickadate/picker.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/puzzleadmin/js/plugins/pickers/pickadate/picker.date.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/puzzleadmin/js/plugins/pickers/pickadate/picker.time.js') }}"></script>   
+    <script type="text/javascript">
+        // Allow only pictures
+        $("#choose_files_btn_picture").click(function(){
+            altair_form_file_upload.choose_files_modal("picture", "user");
+        });
+        // Datetime Picker
+        $(".pickadate").pickadate({
+            format: "dd-mm-yyyy"
+        });
+    </script>
+{% endblock %}
+

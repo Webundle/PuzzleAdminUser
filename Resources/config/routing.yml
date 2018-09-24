@@ -1,0 +1,4 @@
+user:
+    resource: '@PuzzleAdminUserBundle/Resources/config/routing/user.yml'
+group:
+    resource: '@PuzzleAdminUserBundle/Resources/config/routing/group.yml'

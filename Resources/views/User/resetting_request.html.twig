@@ -1,0 +1,37 @@
+{% trans_default_domain 'app' %}
+
+{% extends 'AppBundle::layout_security.html.twig' %}
+
+{% block title %}Douanes App - Mot de passe oublié{% endblock %}
+
+{% block stylesheets %}{{ parent() }}{% endblock %}
+{% block logo %}
+	<div class="signin-info">
+		<div class="col-md-2">
+			<img alt="Le Logo des Douanes Ivoirienne" src="{{ asset('bundles/app/images/logo_1.png') }}" width="100%">
+		</div>
+		<div class="col-md-8">
+			<div class="logopanel">
+				<h1>Douanes CI</h1>
+			</div>
+			<div class="mb20"></div>
+			<p>DEMANDES ET SUIVIS DES ATTESTATIONS DE REGULARITE DE TVA</p>
+			<div class="mb20"></div>
+			<ul class="logolist">
+                <li><i class="fa fa-arrow-circle-o-right mr5"></i> Renseigner votre nom d'utilisateur</li>
+                <li><i class="fa fa-arrow-circle-o-right mr5"></i> Appuyer sur Réinitialiser le mot de passe</li>
+                <li><i class="fa fa-arrow-circle-o-right mr5"></i> Un e-mail de réinitialisation vous sera envoyé à l'adresse électronique renseigné dans votre profil.</li>
+            </ul>
+		</div>
+	</div>
+{% endblock %}
+{% block form %}
+<form method="post" action="{{ path('app_user_resetting_send_email') }}">
+	<h4 class="nomargin">{{ 'security.login.password_forbidden'|trans }}</h4>
+	<input type="text" name="username" class="form-control uname" placeholder="{{ 'security.login.username'|trans }}" required="required" />
+	<a href="{{ path('app_security_login') }}"><small>{{ 'layout.login'|trans }}</small></a>
+	<button class="btn btn-success btn-block">{{ 'resetting.request.submit'|trans }}</button>					
+</form>
+{% endblock %}
+		
+{% block javascripts %}{{ parent() }}{% endblock %}

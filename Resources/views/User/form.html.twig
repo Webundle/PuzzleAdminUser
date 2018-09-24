@@ -1,0 +1,121 @@
+{% trans_default_domain 'admin' %}
+
+{{ form_start(form, {'attr': {'class': 'form-stacked'}}) }}
+<div class="panel panel-flat">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    {{ form_label(form.firstName) }}
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="icon-user"></i>
+                        </span>
+                        {{ form_widget(form.firstName) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.lastName) }}
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="icon-user"></i>
+                        </span>
+                        {{ form_widget(form.lastName) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.email) }}
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="icon-envelope"></i>
+                        </span>
+                        {{ form_widget(form.email) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.username) }}
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="icon-lock"></i>
+                        </span>
+                        {{ form_widget(form.username) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.plainPassword.first) }}
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="icon-lock"></i>
+                        </span>
+                        {{ form_widget(form.plainPassword.first) }}
+                    </div>
+                    {{ form_errors(form.plainPassword) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.plainPassword.second) }}
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="icon-lock"></i>
+                        </span>
+                        {{ form_widget(form.plainPassword.second) }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    {{ form_label(form.credentialsExpiresAt) }}
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="icon-calendar"></i></span>
+                        {% if user is defined and user is not empty %}
+                            {{ form_widget(form.credentialsExpiresAt, {'value': user.credentialsExpiresAt|date('d-m-Y')}) }}
+                        {% else %}
+                            {{ form_widget(form.credentialsExpiresAt) }}
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.accountExpiresAt) }}
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="icon-calendar"></i></span>
+                        {% if user is defined and user is not empty %}
+                            {{ form_widget(form.accountExpiresAt, {'value': user.accountExpiresAt|date('d-m-Y')}) }}
+                        {% else %}
+                            {{ form_widget(form.accountExpiresAt) }}
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="checkbox checkbox-switchery switchery-sm">
+                        {{ form_label(form.enabled) }}
+                        {{ form_widget(form.enabled) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="checkbox checkbox-switchery switchery-sm">
+                        {{ form_label(form.locked) }}
+                        {{ form_widget(form.locked) }}
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    {{ form_label(form.roles) }}
+                    {{ form_widget(form.roles) }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer">
+        <div class="text-center">
+            <a class="btn btn-default" href="{{ url('admin_user_list') }}">
+                <i class="icon-arrow-left8"></i>
+                {{ 'button.cancel'|trans }}
+            </a>
+            <button class="btn btn-success">
+                {{ user is defined ? 'button.update'|trans : 'button.add'|trans }}
+                <i class="icon-checkmark2"></i>
+            </button>
+        </div>
+    </div>
+</div>
+    
+{{ form_end(form) }}

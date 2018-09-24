@@ -1,0 +1,119 @@
+{% trans_default_domain 'admin' %}
+
+{% set subactive = "admin_user_group_list" %}
+
+{% extends 'PuzzleAdminUserBundle::layout_table.html.twig' %}
+
+{% block title %}{{ parent() }} - {{ "user.content.group.show"|trans }} {{ group.name|capitalize }} {% endblock %}
+
+{% block mainsubtitle %} - {{ "user.navigation.group"|trans }}{% endblock %}
+
+{% block headingelements %}
+    <a href="{{ url('admin_user_create', { 'group' : group.id }) }}" class="btn btn-primary btn-labeled">
+        <b><i class="icon-add"></i></b>
+        {{ "user.content.user.create"|trans }}
+    </a>
+{% endblock %}
+
+{% block breadcrumbs %}
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li>
+                <a href="{{ url('admin_user_group_list') }}">
+                    {{ "user.content.group.list"|trans|capitalize }}
+                </a>
+            </li>
+            <li class="active">
+                {{ "user.content.group.show"|trans|capitalize }}
+                <em>{{ group.name }}</em>
+            </li>
+        </ul>
+        <ul class="breadcrumb-elements">
+            {% if users is not empty %}
+                <li>
+                    <a href="#" class="text-danger delete-list toggle-action hide">
+                        <i class="icon-trash-alt"></i> {{ "button.remove_list"|trans }}
+                    </a>
+                    <input type="hidden" value="admin_user_delete" id="delete-route-name"/>
+                </li>
+            {% endif %}
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="icon-plus position-left"></i>
+                    Actions
+                    <span class="caret"></span>
+                </a>
+
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li>
+                        <a href="{{ url('admin_user_group_update', { 'id': group.id }) }}" title="{{ "button.update"|trans }}" alt="{{ "button.update"|trans }}" class="show-modal">
+                            <i class="icon-pencil"></i>
+                            {{ "button.update"|trans }}
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="{{ url('admin_user_group_delete', {'id': group.id}) }}" data-toggle="modal" title="{{ "button.delete"|trans }}" class="delete-item" id="delete-item-{{ group.id }}">
+                            <i class="icon-trash-alt text-danger"></i>
+                            {{ "button.delete"|trans }}
+                        </a>
+                        <input type="hidden" id="label-delete-item-{{ group.id }}" value="{{ group.name }}">
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+{% endblock %}
+
+{% block mainpage %}
+    <div class="col-lg-12">
+        <div class="panel panel-flat">
+            <table class="table datatable">
+                <thead>
+                    <tr>
+                        <th>
+                            {% if users is not empty %}
+                                <a href="#" id="toggle-check">
+                                    <i class="icon-checkbox-unchecked toggle-icon"  id="toggle-check-icon"></i>
+                            </a>
+                                <input type="hidden" value="{{ users|length|default('0') }}" id="toggle-items-count">
+                                <input type="hidden" value="0" id="toggle-items-checked-count">
+                            {% endif %}
+                        </th>
+                        <th>{{ "user.label.user.fullName"|trans }}</th>
+                        <th>{{ "user.label.user.email"|trans }}</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                        {% if user.id != app.user.id %}
+                            <tr class="toggleable" id="item-{{ user.id }}">
+                                <td>
+                                    <a class="text-muted text-small text-left toggleable-btn-select" href="#">
+                                        <i class="icon-checkbox-unchecked toggle-icon toggle-item" id="toggle-item-{{ user.id }}"></i>
+                                    </a>
+                                </td>
+                                <td>{{ user.fullName }}</td>
+                                <td>{{ user.email }}</td>
+                                <td class="text-right">
+                                    <div class="btn-control">
+                                        <span class="icons-list toggleable-btn hide toggleable-btn-controls">
+                                            <a href="{{ url('admin_user_show', { 'id': user.id }) }}" title="{{ "button.show"|trans }}" class="mr-10">
+                                                <i class="icon-eye"></i> 
+                                            </a>
+                                            <a href="{{ url('admin_user_delete', {'id': user.id}) }}" data-toggle="modal" title="{{ "button.delete"|trans }}" class="delete-item" id="delete-item-{{ user.id }}">
+                                                <i class="icon-trash-alt text-danger"></i>
+                                            </a>
+                                            <input type="hidden" id="label-delete-item-{{ user.id }}" value="{{ user.fullName }}">
+                                        </span>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

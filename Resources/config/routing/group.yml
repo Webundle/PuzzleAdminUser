@@ -1,0 +1,24 @@
+admin_user_group_list:
+    path:     /user-group/list
+    defaults: { _controller: 'PuzzleAdminUserBundle:Group:list' }
+    methods:  [GET]
+
+admin_user_group_create:
+    path:     /user-group/create
+    defaults: { _controller: 'PuzzleAdminUserBundle:Group:create' }
+    methods:  [GET, POST]
+
+admin_user_group_show:
+    path:     /user-group/{id}/show
+    defaults: { _controller: 'PuzzleAdminUserBundle:Group:show' }
+    methods:  [GET]
+
+admin_user_group_update:
+    path:     /user-group/{id}/update
+    defaults: { _controller: 'PuzzleAdminUserBundle:Group:update' }
+    methods:  [GET, POST]
+
+admin_user_group_delete:
+    path:     /user-group/{id}/delete
+    defaults: { _controller: 'PuzzleAdminUserBundle:Group:delete' }
+
